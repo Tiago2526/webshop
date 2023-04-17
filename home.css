@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Bebas Neue', cursive;
+}
+
+
+body {
+    background-color: black;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.welcome h1 {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 2px black;
+    text-transform: uppercase;
+}
+
+.decent {
+    height: 100%;
+    display: flex;
+    flex: 1.5;
+    justify-content: center;
+    align-items: center;
+}
+
+.decent form {
+    /* padding: 150px; */
+    padding-left: 450px;
+    padding-right: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: gray;
+    color: whitesmoke;
+    border-radius: 0 1200px;
+}
+
+.decent form .input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;  
+    width: 100%;
+}
+
+.decent form .input .image img {
+    padding: 20px;
+    width: 100%;
+}
+
+.decent form .input .email, .password{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
