@@ -6,16 +6,16 @@ $email = $_POST["user"];
 $password = $_POST["password"];
 
 
-$sql = "SELECT * FROM gegevens WHERE email='" . $email . "'";
+$sql = "SELECT * FROM tblgegevens WHERE email='" . $email . "'";
 $resultaat = $mysqli->query ($sql);
 $row = $resultaat->num_rows;
     if ($row >= 1) {
-        $resultaat = $mysqli->query("SELECT * FROM gegevens WHERE password='" . $password . "'");
+        $resultaat = $mysqli->query("SELECT * FROM tblgegevens WHERE password='" . $password . "'");
     $row = $resultaat->num_rows;
         if($row >= 1){
         header('Location: index.php');
         }else{
-            $_SESSION["fout"];
+            $_SESSION["fout"] = true;
             header("Location: home.php");
         }
     }else{
@@ -59,6 +59,7 @@ $row = $resultaat->num_rows;
             </div>
         </div>
     </body>';
+    session_destroy ();
 }else{
     echo'<!DOCTYPE html>
     <html lang="en">

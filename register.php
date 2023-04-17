@@ -1,5 +1,6 @@
 <?php
-
+include "connect.php";
+session_destroy ();
 echo'<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -9,14 +10,34 @@ echo'<!DOCTYPE html>
         <link rel="stylesheet" href="home.css">
         <title>Document</title>
     </head>
-    <body>
-        
-    
-    
-    
+    <body>';
+    if(isset($_POST["register"])){
+        $naam = $_POST["naam"];
+        $voornaam = $_POST["voornaam"];
+        $email = $_POST["user"];
+        $password = $_POST["password"];
+        print'
+        <div class="container">
+        <div class="welcome">
+        <h1>registreren</h1>
+        </div>
+        <div class="decent">
+        <form method = "post" action = "register.php">
+        <div class="input">
+        <div class="image">
+        <img src="./fotos/Dodge-logo.png" alt="">
+        </div>';
+    if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $password . "')")){
+        print "Record succesvol toegevoegd.<br>";
+    } else {
+        print "Error record toevoegen: " . $mysqli->error . "<br>";
+    }
+    print "<a href = 'home.php'>ga terug naar inlog</a>";
+}else{
+    print'
     <div class="container">
             <div class="welcome">
-                <h1> Welcome to Dodge shop </h1>
+                <h1>registreren</h1>
             </div>
             <div class="decent">
             <form method = "post" action = "register.php">
@@ -41,9 +62,9 @@ echo'<!DOCTYPE html>
                             <input type="password" name="password" required>
                         </div>
                     </div>
-                    
                     <input type="submit" name="register">
             </div>
         </div>
     </body>';
+    }
     ?>
