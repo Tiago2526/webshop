@@ -59,8 +59,9 @@ echo'<!DOCTYPE html>
                         <div class="password">
                             <label for="password">Password </label>
                             <input type="password" name="password" required>
+                            </div>
+                            <a href = "home.php">ga terug naar inlog</a>
                         </div>
-                    </div>
                     <input type="submit" name="register">
             </div>
         </div>
