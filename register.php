@@ -1,6 +1,5 @@
 <?php
 include "connect.php";
-session_destroy ();
 echo'<!DOCTYPE html>
     <html lang="en">
     <head>

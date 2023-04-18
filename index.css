@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+
+}
+.navigatiebalk{
+    width: 100%;
+
+}
+.navigatiebalk li{
+    color: #fffff0;
+    display: inline-block;
+    list-style-type: none;
+}
+.navigatiebalk a{
+    color: #fffff0;
+    text-decoration: none;
+    list-style-type: none;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+#home{
+    text-align: left;
+    color: #fffff0;
+}
+#nav{
+    text-align: center;
+}
+.navigatiebalk a:hover{
+    color: gray;
+}
+#img{
+    text-align: right;
+}
