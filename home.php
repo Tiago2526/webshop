@@ -13,14 +13,15 @@ $row = $resultaat->num_rows;
         $resultaat = $mysqli->query("SELECT * FROM tblgegevens WHERE password='" . $password . "'");
     $row = $resultaat->num_rows;
         if($row >= 1){
+        $_SESSION["inlog"] = $email;
         header('Location: index.php');
         }else{
-            $_SESSION["fout"] = true;
             header("Location: home.php");
+            $_SESSION["fout"] = true;
         }
     }else{
-        $_SESSION["fout"] = true;
         header("Location: home.php");
+        $_SESSION["fout"] = true;
         
     }
 }else if(isset($_SESSION["fout"])){
