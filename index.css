@@ -1,34 +1,64 @@
-body{
-    background-color: black;
-
-}
-.navigatiebalk{
-    width: 100%;
-
-}
-.navigatiebalk li{
-    color: #fffff0;
-    display: inline-block;
-    list-style-type: none;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-.navigatiebalk a{
-    color: #fffff0;
-    text-decoration: none;
-    list-style-type: none;
-    font-size: 20px;
-    font-family: sans-serif;
+body {
+	background-color: black;
+	font-size: 25px;
+	color: #fffff0;
+    font-family: 'Roboto', sans-serif;
 }
-#home{
-    text-align: left;
-    color: #fffff0;
+.container {
+	padding: 20px 70px 60px 70px;
+	display: flex;
+	flex-direction: column;
+	gap: 120px;
 }
-#nav{
-    float: center;
+
+header{
+	display: flex;
+	align-items: center;
 }
-.navigatiebalk a:hover{
-    color: gray;
+
+header h1{
+	flex: 1;
+	color: inherit;
 }
-#img{
+
+header nav {
+	flex: 1;
+	text-align: center;
+}
+
+header .inlog{
+	flex: 1;
+	text-align: right;
+
+}
+header .account{
+    flex: 1;
     text-align: right;
+}
+nav li,a{
+text-decoration: none;
+color: inherit	;
+transition: .2s ease-in-out;
+font-size: 30px;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+}
+
+nav ul li{
+	display: inline-block;
+}
+nav ul a:hover{
+	color: #696773;
 }
