@@ -1,5 +1,6 @@
 <?php
 include "connect.php";
+session_start();
 echo'<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -26,7 +27,9 @@ echo'<!DOCTYPE html>
         <div class="image">
         <img src="./fotos/Dodge-logo.png" alt="">
         </div>';
-    if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $password . "')")){
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $_SESSION[$email] = PASSWORD_DEFAULT;
+    if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "')")){
         print "Record succesvol toegevoegd.<br>";
     } else {
         print "Error record toevoegen: " . $mysqli->error . "<br>";

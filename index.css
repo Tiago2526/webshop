@@ -23,11 +23,12 @@ header{
 	align-items: center;
 }
 
-header h1{
+header a{
 	flex: 1;
-	color: inherit;
 }
-
+.container h1{
+	color: #BB0A21;
+}
 header nav {
 	flex: 1;
 	text-align: center;
@@ -61,4 +62,25 @@ nav ul li{
 }
 nav ul a:hover{
 	color: #696773;
+}
+.showroom img{
+	width: 80%;
+	position: absolute;
+	left: 0;
+	filter: brightness(70%);
+	text-align: left;
+}
+.showroom h2{
+	color: #f5f0f6;
+	opacity: 80%;
+	position: absolute;
+	top: 75%;
+	left: 80%;	
+	background-color:#BB0A21;
+	border-radius: 10px;
+	margin: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
