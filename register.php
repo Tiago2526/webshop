@@ -27,8 +27,9 @@ echo'<!DOCTYPE html>
         <div class="image">
         <img src="./fotos/Dodge-logo.png" alt="">
         </div>';
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $_SESSION[$email] = PASSWORD_DEFAULT;
+        $hash = PASSWORD_DEFAULT;
+        $hashedPassword = password_hash($password, $hash);
+        $_SESSION[$email] = $hash;
     if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "')")){
         print "Record succesvol toegevoegd.<br>";
     } else {

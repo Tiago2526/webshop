@@ -5,62 +5,22 @@ if(isset($_POST["login"])){
 $email = $_POST["user"];
 $password = $_POST["password"];
 
-
+}else{
+$email = $_POST["user"];
+$password = $_POST["password"];
 $sql = "SELECT * FROM tblgegevens WHERE email='" . $email . "'";
-$resultaat = $mysqli->query ($sql);
+$resultaat = $mysqli->query($sql);
+if(password_verify($password, $resultaat->fetch_assoc()["password"])){
+$resultaat = $mysqli->query("SELECT * from tblgegevens where email='".$email."'");
 $row = $resultaat->num_rows;
-    if ($row >= 1) {
-        $resultaat = $mysqli->query("SELECT * FROM tblgegevens WHERE password='" . $password . "'");
-    $row = $resultaat->num_rows;
-        if($row >= 1){
-        $_SESSION["inlog"] = $email;
-        header('Location: index.php');
-        }else{
-            header("Location: home.php");
-            $_SESSION["fout"] = true;
-        }
-    }else{
-        header("Location: home.php");
-        $_SESSION["fout"] = true;
-        
-    }
-}else if(isset($_SESSION["fout"])){
-    echo'<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="home.css">
-        <title>Document</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="welcome">
-                <h1> Welcome to Dodge shop </h1>
-            </div>
-            <div class="decent">
-            <form method = "post" action = "home.php">
-                    <div class="input">
-                        <div class="image">
-                            <img src="./fotos/Dodge-logo.png" alt="">
-                        </div>
-                        <div class="email">
-                            <label for="Email">Email </label>
-                            <input type="email" name="user" required>
-                        </div>
-                        <div class="password">
-                            <label for="password">Password </label>
-                            <input type="password" name="password" required>
-                        </div>
-                    </div>
-                    <label id = "fout">foute invoer</label>
-                    <input type="submit" name="login">
-                    <a id ="register" href="register.php">register </a>
-            </div>
-        </div>
-    </body>';
-    session_destroy ();
+if($row != 1){
+
+    header('location: home.php');
+
+}else{
+    $_SESSION["inlog"] = $email;
+    header('location: home.php');
+}
 }else{
     echo'<!DOCTYPE html>
     <html lang="en">
@@ -96,5 +56,6 @@ $row = $resultaat->num_rows;
                 </div>
         </div>
     </body>';
+}
 }
 ?>
