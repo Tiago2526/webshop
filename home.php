@@ -1,11 +1,7 @@
 <?php
 include "connect.php";
 session_start();
-if(isset($_POST["login"])){
-$email = $_POST["user"];
-$password = $_POST["password"];
-
-}else{
+if($_POST["login"]){
 $email = $_POST["user"];
 $password = $_POST["password"];
 $sql = "SELECT * FROM tblgegevens WHERE email='" . $email . "'";
@@ -14,12 +10,13 @@ if(password_verify($password, $resultaat->fetch_assoc()["password"])){
 $resultaat = $mysqli->query("SELECT * from tblgegevens where email='".$email."'");
 $row = $resultaat->num_rows;
 if($row != 1){
-
-    header('location: home.php');
-
+    header('location: home.php?fout');
 }else{
     $_SESSION["inlog"] = $email;
-    header('location: home.php');
+    header('location: index.php');
+}
+}else{
+    header('location: home.php?fout');
 }
 }else{
     echo'<!DOCTYPE html>
@@ -48,14 +45,16 @@ if($row != 1){
                         </div>
                         <div class="password">
                             <label for="password">Password </label>
-                            <input type="password" name="password" required>
-                        </div>
+                            <input type="password" name="password" required>';
+                            if(isset($_GET["fout"])){
+                                print '<label id = "fout">Foute invoer</label>';
+                            }
+                        print'</div>
                     </div>
                     <input type="submit" name="login" >
                     <a href="register.php">register</a>
                 </div>
         </div>
     </body>';
-}
 }
 ?>
