@@ -22,7 +22,7 @@ print'
 		 	</nav>
 		 	<div class="account">';
              if(isset($_SESSION["inlog"])){
-				print'<a href="uitlog.php"><img src="./fotos/account.png" height="60" width="60"></a>';
+				print'<a href="account.php"><img src="./fotos/account.png" height="60" width="60"></a>';
 			 }else{
 				print '<a href="home.php"><img src="./fotos/inlog.png" height="40" width="40"></a>';
 			}
