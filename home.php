@@ -16,7 +16,7 @@ if($row != 1){
     $resultaat = $mysqli->query("SELECT * from tblgegevens where email='".$email."' AND admin = 1") ;
     $row = $resultaat->num_rows;
     if($row == 1){
-        $_SERVER["admin"] = $email;
+        $_SESSION   ["admin"] = $email;
         header('location: index.php');
     }else{
         header('location: index.php');

@@ -29,7 +29,8 @@ print'
 		 			<li><a href="categorieen.php">Categorieen</a></li>
 		 		</ul>
 		 	</nav>
-		 	<div class="account">';
+		 	<div class="account">
+			 <a href = "shoppingcart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
              if(isset($_SESSION["inlog"])){
 				print'<a href="uitlog.php"><img src="./fotos/account.png" height="60" width="60"></a>';
 			 }else{
@@ -40,6 +41,7 @@ print'
 		</header>
 		<div class = "products">
 			<img src = "./fotos/blackdodgechallenger4k.png">	
+			<a href ="toevoegen.php">koop nu</a>
 		</div>
 </body>
 </html>';

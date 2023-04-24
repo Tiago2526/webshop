@@ -33,23 +33,25 @@ header nav {
 	flex: 1;
 	text-align: center;
 }
-
-header .inlog{
-	flex: 1;
-	text-align: right;
-
-}
 header .account{
     flex: 1;
     text-align: right;
 }
+
 nav li,a{
 text-decoration: none;
 color: inherit	;
 transition: .2s ease-in-out;
 font-size: 30px;
 }
+.account #loguit{
+	margin-top: 5px	;
+}
 
+.account #winkelkar{
+margin-top: 0;
+	margin: 5px;
+}
 nav ul {
 	list-style: none;
 	display: flex;
@@ -84,88 +86,11 @@ nav ul a:hover{
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-.products img:hover{
-border: 2px solid #161616;
+.products a{
+	position: absolute;
+	left: 10%;
+	top: 50%;
 }
-.products:hover{
-	/* Frame 1 */
-
-position: relative;
-width: 1250px;
-height: 666px;
-
-background: #000000;
-
-
-/* blackdodgechallenger4k 1 */
-
-position: absolute;
-width: 1024px;
-height: 641px;
-left: 113px;
-top: 12px;
-
-background: url(blackdodgechallenger4k.png);
-
-
-/* Frame 2 */
-
-position: relative;
-width: 1250px;
-height: 666px;
-
-background: #000000;
-
-
-/* blackdodgechallenger4k 1 */
-
-position: absolute;
-width: 1024px;
-height: 641px;
-left: 113px;
-top: 12px;
-
-background: url(blackdodgechallenger4k.png);
-
-
-/* Rectangle 1 */
-
-position: absolute;
-width: 1250px;
-height: 347px;
-left: 0px;
-top: 319px;
-
-background: rgba(22, 22, 22, 0.5);
-
-
-/* Rectangle 2 */
-
-position: absolute;
-width: 785px;
-height: 220px;
-left: 212px;
-top: 379px;
-
-background: #00FFFF;
-
-
-/* Koop nu */
-
-position: absolute;
-width: 701px;
-height: 181px;
-left: 236px;
-top: 398px;
-
-font-family: 'Roboto Serif';
-font-style: normal;
-font-weight: 500;
-font-size: 128px;
-line-height: 150px;
-text-align: center;
-
-color: #000000;
-
-
+.products a:hover{
+	color: #696773;
 }

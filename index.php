@@ -20,9 +20,12 @@ print'
 		 			<li><a href="categorieen.php">Categorieen</a></li>
 		 		</ul>
 		 	</nav>
-		 	<div class="account">';
-             if(isset($_SESSION["inlog"])){
+		 	<div class="account">
+			<a href = "shoppingcart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
+			if(isset($_SESSION["admin"])){
 				print'<a href="account.php"><img src="./fotos/account.png" height="60" width="60"></a>';
+			}else if(isset($_SESSION["inlog"])){
+				print'<a href="uitlog.php"><img src="./fotos/account.png" height="60" width="60"></a>';
 			 }else{
 				print '<a href="home.php"><img src="./fotos/inlog.png" height="40" width="40"></a>';
 			}
