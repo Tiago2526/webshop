@@ -32,7 +32,7 @@ print'
 		</header>
 		<div class= "showroom">
 		<img src = "./fotos/blackdodgechallenger4k.png">
-		<h2>lees meer</h2>
+		<a href ="products.php"><h2>lees meer</h2>
 		</div>
 	</div>
 </body>

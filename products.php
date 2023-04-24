@@ -36,9 +36,11 @@ print'
 				print '<a href="home.php"><img src="./fotos/inlog.png" height="40" width="40"></a>';
 			}
 			print'
-		
     </div>
 		</header>
+		<div class = "products">
+			<img src = "./fotos/blackdodgechallenger4k.png">	
+		</div>
 </body>
 </html>';
 ?>

@@ -13,7 +13,14 @@ if($row != 1){
     header('location: home.php?fout');
 }else{
     $_SESSION["inlog"] = $email;
-    header('location: index.php');
+    $resultaat = $mysqli->query("SELECT * from tblgegevens where email='".$email."' AND admin = 1") ;
+    $row = $resultaat->num_rows;
+    if($row == 1){
+        $_SERVER["admin"] = $email;
+        header('location: index.php');
+    }else{
+        header('location: index.php');
+    }
 }
 }else{
     header('location: home.php?fout');

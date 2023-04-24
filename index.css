@@ -70,11 +70,11 @@ nav ul a:hover{
 	filter: brightness(70%);
 	text-align: left;
 }
-.showroom h2{
+.showroom a{
 	color: #f5f0f6;
 	opacity: 80%;
 	position: absolute;
-	top: 75%;
+	top: 65%;
 	left: 80%;	
 	background-color:#BB0A21;
 	border-radius: 10px;
@@ -83,4 +83,89 @@ nav ul a:hover{
 	padding-right: 25px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+.products img:hover{
+border: 2px solid #161616;
+}
+.products:hover{
+	/* Frame 1 */
+
+position: relative;
+width: 1250px;
+height: 666px;
+
+background: #000000;
+
+
+/* blackdodgechallenger4k 1 */
+
+position: absolute;
+width: 1024px;
+height: 641px;
+left: 113px;
+top: 12px;
+
+background: url(blackdodgechallenger4k.png);
+
+
+/* Frame 2 */
+
+position: relative;
+width: 1250px;
+height: 666px;
+
+background: #000000;
+
+
+/* blackdodgechallenger4k 1 */
+
+position: absolute;
+width: 1024px;
+height: 641px;
+left: 113px;
+top: 12px;
+
+background: url(blackdodgechallenger4k.png);
+
+
+/* Rectangle 1 */
+
+position: absolute;
+width: 1250px;
+height: 347px;
+left: 0px;
+top: 319px;
+
+background: rgba(22, 22, 22, 0.5);
+
+
+/* Rectangle 2 */
+
+position: absolute;
+width: 785px;
+height: 220px;
+left: 212px;
+top: 379px;
+
+background: #00FFFF;
+
+
+/* Koop nu */
+
+position: absolute;
+width: 701px;
+height: 181px;
+left: 236px;
+top: 398px;
+
+font-family: 'Roboto Serif';
+font-style: normal;
+font-weight: 500;
+font-size: 128px;
+line-height: 150px;
+text-align: center;
+
+color: #000000;
+
+
 }
