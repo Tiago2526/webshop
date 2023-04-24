@@ -86,11 +86,27 @@ nav ul a:hover{
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-.products a{
+.challenger a{
 	position: absolute;
-	left: 10%;
-	top: 50%;
+	left: 35%;
+	top: 45%;
+	font-weight: bolder;
+}
+.charger a{
+	position: absolute;
+	right: 10%; 
+	font-weight: bolder;
 }
 .products a:hover{
-	color: #696773;
+	color: #BB0A21;
+}
+.challenger img{
+	width: 40%;
+	position: relative;
+}
+.charger img{
+	opacity: 70%;
+	position: relative;
+	margin-left: 70%;
+	margin-top: 0px;
 }

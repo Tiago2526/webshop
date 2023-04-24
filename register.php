@@ -16,6 +16,12 @@ echo'<!DOCTYPE html>
         $voornaam = $_POST["voornaam"];
         $email = $_POST["user"];
         $password = $_POST["password"];
+        $sql = "SELECT * FROM tblgegevens where email = '".$email."'";
+        $resultaat = $mysqli->query($sql);
+        $rows = $resultaat->num_rows;
+        if($rows == 1){
+        header('location: register.php?fout');
+        }else{
         print'
         <div class="container">
         <div class="welcome">
@@ -36,6 +42,7 @@ echo'<!DOCTYPE html>
         print "Error record toevoegen: " . $mysqli->error . "<br>";
     }
     print "<a href = 'home.php'>ga terug naar inlog</a>";
+    }
 }else{
     print'
     <div class="container">
@@ -62,8 +69,11 @@ echo'<!DOCTYPE html>
                         </div>
                         <div class="password">
                             <label for="password">Password </label>
-                            <input type="password" name="password" required>
-                            </div>
+                            <input type="password" name="password" required>';
+                            if(isset($_GET["fout"])){
+                                print '<label id = "fout">Een gebruiker met deze email bestaat al</label>';
+                            }
+                            print '</div>
                             <a href = "home.php">ga terug naar inlog</a>
                         </div>
                     <input type="submit" name="register">

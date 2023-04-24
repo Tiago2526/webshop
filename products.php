@@ -40,8 +40,14 @@ print'
     </div>
 		</header>
 		<div class = "products">
-			<img src = "./fotos/blackdodgechallenger4k.png">	
-			<a href ="toevoegen.php">koop nu</a>
+			<div class="challenger">
+				<img src = "./fotos/blackdodgechallenger4k.png">	
+				<a href ="toevoegen.php?id=1">koop nu</a>
+			</div>
+			<div class="charger">
+				<img src ="./fotos/dodgecharger.png">
+				<a href = "toevoegen.php?id=2">koop nu</a>
+			</div>
 		</div>
 </body>
 </html>';
