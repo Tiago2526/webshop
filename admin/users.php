@@ -1,0 +1,32 @@
+<?php
+include 'connect.php';
+session_start();
+print '<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="admin.css">
+	<title></title>
+</head>
+<body>
+	<div class="container">
+		<nav>
+		 	<a href= "http://localhost/webshop/account.php"><h1>Dodge</h1></a>
+		</nav>
+        <div class="users">
+		<table>';
+        $resultaat = $mysqli->query("SELECT * from tblgegevens where admin is null");
+		while ($row = $resultaat->fetch_assoc()){
+			print "<tr><td>". $row["email"]."</td><td>". $row["voornaam"]."</td><td>". $row["naam"]."</td><td>
+			<a href = wijzig.php?teveranderen=".$row['email'].">Wijzigen</a></td><td>
+			<a href= wis.php?tewissen=".$row['email'].">Wis</a></td></tr>";
+		}
+        print'</table>
+		</div>
+		<a href="toevoegen.php?admin=0">Add user</a>
+    </div>
+    
+</body>
+</html>';
+?>

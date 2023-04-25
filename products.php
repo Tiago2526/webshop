@@ -41,11 +41,10 @@ print'
 		</nav>
 		<div class="products">
 			<div class="challenger">
-				<a href ="toevoegen.php?id=1">koop nu</a>
+				<a href ="toevoegen.php?id=1">Toevoegen</a>
 			</div>
 			<div class="charger">
-				<img src ="./fotos/dodgecharger.png">
-				<a href = "toevoegen.php?id=2">koop nu</a>
+				<a href = "toevoegen.php?id=2">Toevoegen</a>
 			</div>
 		</div>
 	</div>

@@ -29,14 +29,13 @@ nav a{
     font-size: 30px;
 	margin-top: 20px;
 }
-.links a{
-	text-decoration: none;
+.users tr{
+margin-bottom: 30px;
+}
+.gegevens table label{
 	color: inherit;
 }
-.links h2{
-	margin-bottom: 40px;
-	
-}
-.links h2:hover{
-	background-color: #161616;
+.gegevens input{
+	background-color: black;
+	color: inherit;
 }

@@ -19,16 +19,13 @@ body {
 	flex-direction: column;
 	gap: 120px;
 }
-
+.container h1 {
+	color: #BB0A21;
+}
 nav {
 	display: flex;
 	align-items: center;
 }
-
-.container h1 {
-	color: #BB0A21;
-}
-
 nav .logo {
 	flex: 1;
 	text-align: left;
@@ -47,8 +44,7 @@ nav .account {
 	text-align: right;
 	gap: 20px;
 }
-nav li,
-a {
+nav li,a {
 	text-decoration: none;
 	color: inherit;
 	transition: .2s ease-in-out;
@@ -88,44 +84,29 @@ nav ul a:hover {
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-
-.challenger a {
-	/* position: absolute; */
-	left: 35%;
-	top: 45%;
-	font-weight: bolder;
-}
-
-.charger a {
-	position: absolute;
-	right: 10%;
-	font-weight: bolder;
-}
-
-.products {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-}
-
-.products a:hover {
-	color: #BB0A21;
-}
-
 .challenger {
 	padding: 100px;
 	background-image: url("./fotos/blackdodgechallenger4k.png");
 	background-position: left;
 	background-repeat: no-repeat;
+	background-size: 150px;
+	width: 600px;
+	height: 300px;
+	background-size: cover;
 }
-
-.charger {
-	background-image: url("./fotos/")
+.challenger a{
+	border-radius: 20px;
+	padding: 5px;
+	background-color: #BB0A21;
 }
-
-.charger img {
+.charger{
+	padding: 100px;
+	background-image: url("./fotos/dodgecharger.png");
+	background-position:left;
+	background-repeat: no-repeat;
+	background-size: 150px;
 	opacity: 70%;
-	position: relative;
-	margin-left: 70%;
-	margin-top: 0px;
+	width: 600px;
+	height: 300px;
+	background-size: cover;	
 }

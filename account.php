@@ -9,9 +9,16 @@ print '<!DOCTYPE html>
 </head>
 <body>
 	<div class="container">
-		<header>
+		<nav>
 		 	<a href= "index.php"><h1>Dodge</h1></a>
-		</header>
+		</nav>
+	<div class ="links">
+		<a href= "./admin/users.php"><h2>Users</h2></a>
+		<a href= "./admin/admins.php"><h2>Admins</h2></a>
+		<a href= "./admin/products.php"><h2>Products</h2></a>
+		<a href= "./admin/sales.php"><h2>Sales</h2></a>
+		</div>
+
 	</div>
 </body>
 </html>';
