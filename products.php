@@ -21,27 +21,26 @@ print'
 </head>
 <body>
 	<div class="container">
-		<header>
-		 	<a href = "index.php"><h1>Dodge</h1></a>
-		 	<nav>
+		<nav>
+		 	<a class = "logo" href = "index.php"><h1>Dodge</h1></a>
+		 	<div class = "links">
 		 		<ul>
 		 			<li><a href="products.php">Products</a></li>
 		 			<li><a href="categorieen.php">Categorieen</a></li>
 		 		</ul>
-		 	</nav>
+		 	</div>
 		 	<div class="account">
-			 <a href = "shoppingcart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
+			 <a href = "cart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
              if(isset($_SESSION["inlog"])){
 				print'<a href="uitlog.php"><img src="./fotos/account.png" height="60" width="60"></a>';
 			 }else{
 				print '<a href="home.php"><img src="./fotos/inlog.png" height="40" width="40"></a>';
-			}
+				}
 			print'
-    </div>
-		</header>
-		<div class = "products">
+    		</div>
+		</nav>
+		<div class="products">
 			<div class="challenger">
-				<img src = "./fotos/blackdodgechallenger4k.png">	
 				<a href ="toevoegen.php?id=1">koop nu</a>
 			</div>
 			<div class="charger">
@@ -49,6 +48,7 @@ print'
 				<a href = "toevoegen.php?id=2">koop nu</a>
 			</div>
 		</div>
+	</div>
 </body>
 </html>';
 ?>

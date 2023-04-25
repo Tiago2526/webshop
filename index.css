@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-*{
+
+* {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -9,8 +10,9 @@ body {
 	background-color: black;
 	font-size: 25px;
 	color: #fffff0;
-    font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
+
 .container {
 	padding: 20px 70px 60px 70px;
 	display: flex;
@@ -18,39 +20,39 @@ body {
 	gap: 120px;
 }
 
-header{
+nav {
 	display: flex;
 	align-items: center;
 }
 
-header a{
-	flex: 1;
-}
-.container h1{
+.container h1 {
 	color: #BB0A21;
 }
-header nav {
+
+nav .logo {
+	flex: 1;
+	text-align: left;
+}
+
+nav .links {
 	flex: 1;
 	text-align: center;
 }
-header .account{
-    flex: 1;
-    text-align: right;
-}
 
-nav li,a{
-text-decoration: none;
-color: inherit	;
-transition: .2s ease-in-out;
-font-size: 30px;
+nav .account {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex: 1;
+	text-align: right;
+	gap: 20px;
 }
-.account #loguit{
-	margin-top: 5px	;
-}
-
-.account #winkelkar{
-margin-top: 0;
-	margin: 5px;
+nav li,
+a {
+	text-decoration: none;
+	color: inherit;
+	transition: .2s ease-in-out;
+	font-size: 30px;
 }
 nav ul {
 	list-style: none;
@@ -59,26 +61,26 @@ nav ul {
 	justify-content: center;
 }
 
-nav ul li{
-	display: inline-block;
-}
-nav ul a:hover{
+
+nav ul a:hover {
 	color: #696773;
 }
-.showroom img{
+
+.showroom img {
 	width: 80%;
 	position: absolute;
 	left: 0;
 	filter: brightness(70%);
 	text-align: left;
 }
-.showroom a{
+
+.showroom a {
 	color: #f5f0f6;
 	opacity: 80%;
 	position: absolute;
 	top: 65%;
-	left: 80%;	
-	background-color:#BB0A21;
+	left: 80%;
+	background-color: #BB0A21;
 	border-radius: 10px;
 	margin: 10px;
 	padding-left: 25px;
@@ -86,25 +88,42 @@ nav ul a:hover{
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-.challenger a{
-	position: absolute;
+
+.challenger a {
+	/* position: absolute; */
 	left: 35%;
 	top: 45%;
 	font-weight: bolder;
 }
-.charger a{
+
+.charger a {
 	position: absolute;
-	right: 10%; 
+	right: 10%;
 	font-weight: bolder;
 }
-.products a:hover{
+
+.products {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.products a:hover {
 	color: #BB0A21;
 }
-.challenger img{
-	width: 40%;
-	position: relative;
+
+.challenger {
+	padding: 100px;
+	background-image: url("./fotos/blackdodgechallenger4k.png");
+	background-position: left;
+	background-repeat: no-repeat;
 }
-.charger img{
+
+.charger {
+	background-image: url("./fotos/")
+}
+
+.charger img {
 	opacity: 70%;
 	position: relative;
 	margin-left: 70%;
