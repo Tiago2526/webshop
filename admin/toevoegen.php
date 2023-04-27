@@ -13,12 +13,20 @@ if(isset($_POST["submit"])){
     header('location: toevoegen.php?fout');
     }else{
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "')")){
-    header('location: users.php');
-} else {
-    print "Error record toevoegen: " . $mysqli->error . "<br>";
-}
-}
+        if($_SESSION["admin"] == 1){
+        if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password,admin) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "',1)")){
+        header('location: admins.php');
+        }else{
+        print $mysqli->error;    
+        }
+    }else{
+        if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "')")){
+        header('location: users.php');
+        } else {
+        print $mysqli->error;
+        }
+    }
+    }
 }else{
 if(isset($_GET["admin"])){
     $_SESSION["admin"]= $_GET["admin"];
@@ -54,7 +62,7 @@ print'<!DOCTYPE html>
             </div>
             <div class="email">
                 <label for="email">Email</label>
-                <input type = "text" name= "email" required>
+                <input type = "email" name= "email" required>
             </div>
             <div class="passwoord">
                 <label for="password">Password</label>

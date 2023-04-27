@@ -17,6 +17,7 @@ print '<!DOCTYPE html>
 		<a href= "./admin/admins.php"><h2>Admins</h2></a>
 		<a href= "./admin/products.php"><h2>Products</h2></a>
 		<a href= "./admin/sales.php"><h2>Sales</h2></a>
+		<a href="uitlog.php"><h2>Uitlog</h2></a>
 		</div>
 
 	</div>

@@ -10,7 +10,7 @@ print '<!DOCTYPE html>
 <body>
 	<div class="container">
 		<nav>
-		 	<a href= "http://localhost/webshop/account.php"><h1>Dodge</h1></a>
+		 	<a href= "../account.php><h1>Dodge</h1></a>
 		</nav>
 	</div>
 </body>

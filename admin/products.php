@@ -1,4 +1,5 @@
 <?php
+include 'connect.php';
 print '<!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +11,19 @@ print '<!DOCTYPE html>
 <body>
 	<div class="container">
 		<nav>
-		 	<a href= "http://localhost/webshop/account.php"><h1>Dodge</h1></a>
+		 	<a href= "../account.php"><h1>Dodge</h1></a>
 		</nav>
+		<div class="products">
+		<table>';
+			$resultaat = $mysqli->query("SELECT * from tblproducten");
+			while($row = $resultaat->fetch_assoc()){
+				print "<tr><td>". $row["id"]."</td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
+			<a href = productswijzig.php?teveranderen=".$row['id'].">Wijzigen</a></td><td>
+			<a href= productswis.php?tewissen=".$row['id'].">Wis</a></td></tr>";
+			}
+		print'</table>
+		<a href="productstoevoegen.php">Add product</a>
+		</div>
 	</div>
 </body>
 </html>';
