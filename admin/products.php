@@ -17,7 +17,7 @@ print '<!DOCTYPE html>
 		<table>';
 			$resultaat = $mysqli->query("SELECT * from tblproducten");
 			while($row = $resultaat->fetch_assoc()){
-				print "<tr><td>". $row["id"]."</td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
+				print "<tr><td>". $row["id"]."</td><td>". $row["image"]."</td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
 			<a href = productswijzig.php?teveranderen=".$row['id'].">Wijzigen</a></td><td>
 			<a href= productswis.php?tewissen=".$row['id'].">Wis</a></td></tr>";
 			}

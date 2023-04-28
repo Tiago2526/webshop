@@ -4,20 +4,17 @@ session_start();
 if(isset($_POST["submit"])){
 $naam = $_POST["naam"];
 $voornaam = $_POST["voornaam"];
-$email = $_POST["email"];
+$oldemail = $_SESSION["inlog"];
+$newemail = $_POST["email"];
 $password = $_POST["password"];
 if(empty($password)){
-    $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $email."' WHERE email = '".$email."'"; 
+    $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $newemail."' WHERE email = '".$oldemail."'"; 
 }else{
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $email."',password ='" .$hashedPassword."' WHERE email = '".$email."'";
+    $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $newemail."',password ='" .$hashedPassword."' WHERE email = '".$oldemail."'";
 }
 if($mysqli->query($sql)){
-  if(isset($_SESSION["admin"])){
-    header('location:admins.php');
-  }else{
     header('location:users.php');
-    }
 }else{
   print $mysqli->error;
 }

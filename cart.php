@@ -1,4 +1,7 @@
 <?php
+include 'connect.php';
+session_start();
+if(isset($_SESSION["inlog"])){
 print '<!DOCTYPE html>
 <html>
 <head>
@@ -21,4 +24,7 @@ print '<!DOCTYPE html>
 	</div>
 </body>
 </html>';
+}else{
+	header('location:home.php');
+}
 ?>

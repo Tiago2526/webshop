@@ -2,14 +2,21 @@
 include 'connect.php';
 if(isset($_POST["submit"])){
 $id =$_POST["id"];
-$naam = $_POST["name"];
-$prijs =$_POST["prijs"];
-$sql = "INSERT INTO tblproducten(id,naam,prijs)VALUES('" . $id . "','" . $naam . "','" . $prijs . "')";
-if($mysqli->query($sql)){
-header('location: products.php');
-}else{
-print $mysqli->error;
-}
+$resultaat = $mysqli->query("SELECT * from tblproducten where id= '".$id."'");
+$row = $resultaat->num_rows;
+if($row == 1){
+header('location:productstoevoegen.php?fout');
+    }else{
+    $naam = $_POST["name"];
+    $image = $_POST["image"];
+    $prijs =$_POST["prijs"];
+    $sql = "INSERT INTO tblproducten(id,image,naam,prijs)VALUES('" . $id . "','" . $image . "','" . $naam . "','" . $prijs . "')";
+        if($mysqli->query($sql)){
+        header('location: products.php');
+        }else{
+        print $mysqli->error;
+        }
+    }
 }else{
 print'<!DOCTYPE html>
 <html lang="en">
@@ -31,6 +38,10 @@ print'<!DOCTYPE html>
             <label for="id">id</label>
             <input type = "text" name= "id" required>
         </div>
+        <div class="image">
+        <label for="image">image</label>
+        <input type = "text" name= "image" required>
+        </div>
         <div class="name">
             <label for="name">naam</label>
             <input type = "text" name= "name" required>
@@ -39,6 +50,9 @@ print'<!DOCTYPE html>
             <label for="prijs">prijs</label>
             <input type = "text" name= "prijs" required>
         </div>';
+        if(isset($_GET["fout"])){
+            print '<label id = "fout">Foute invoer</label>';
+        }
         print'<input type="submit" name="submit" >
     </div>
     </form>

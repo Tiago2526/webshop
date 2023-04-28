@@ -38,15 +38,15 @@ print'
 				}
 			print'
     		</div>
-		</nav>
-		<div class="products">
-			<div class="challenger">
-				<a href ="toevoegen.php?id=1">Toevoegen</a>
-			</div>
-			<div class="charger">
-				<a href = "toevoegen.php?id=2">Toevoegen</a>
-			</div>
-		</div>
+		</nav>';
+		$resultaat = $mysqli->query("SELECT * FROM tblproducten");
+		while($row = $resultaat->fetch_assoc()){
+			print'<div class="products">
+			<img src="'.$row["image"].'">
+			<a href= toevoegen.php?id='.$row['id'].'><h2>Koop nu</h2></a>
+			</div>';
+		}
+		print'</div>
 	</div>
 </body>
 </html>';
