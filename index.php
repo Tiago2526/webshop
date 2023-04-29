@@ -35,7 +35,7 @@ print'
 		</nav>
 		<div class= "showroom">
 		<img src = "./fotos/blackdodgechallenger4k.png">
-		<a href ="products.php"><h2>lees meer</h2>
+		<a href ="products.php"><h2>Koop nu</h2>
 		</div>
 	</div>
 </body>

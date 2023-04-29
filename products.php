@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-</head>
-<body>
 <?php
 session_start();
 include "connect.php";
@@ -31,11 +22,13 @@ print'
 		 	</div>
 		 	<div class="account">
 			 <a href = "cart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
-             if(isset($_SESSION["inlog"])){
+			 if(isset($_SESSION["admin"])){
+				print'<a href="account.php"><img src="./fotos/account.png" height="60" width="60"></a>';
+			}else if(isset($_SESSION["inlog"])){
 				print'<a href="uitlog.php"><img src="./fotos/account.png" height="60" width="60"></a>';
 			 }else{
-				print '<a href="home.php"><img src="./fotos/inlog.png" height="40" width="40"></a>';
-				}
+				print '<a href="home.php"><img id="loguit" src="./fotos/inlog.png" height="40" width="40"></a>';
+			}
 			print'
     		</div>
 		</nav>';
