@@ -32,6 +32,33 @@ nav a{
 .users tr{
 margin-bottom: 30px;
 }
+.users th{
+	text-align: left;
+	padding-right: 5px;
+}
+.users td{
+	padding-right: 10px;
+}
+.products tr{
+	margin-bottom: 30px;
+}
+.products th{
+	text-align: left;
+	padding-right: 5px;
+}
+.products td{
+	padding-right: 10px;
+}
+.sales tr{
+	margin-bottom: 30px;
+}
+.sales th{
+	text-align: left;
+	padding-right: 5px;
+}
+.sales td{
+	padding-right: 10px;
+}
 .gegevens table label{
 	color: inherit;
 }

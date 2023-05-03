@@ -1,22 +1,15 @@
 <?php
 include 'connect.php';
 if(isset($_POST["submit"])){
-$id =$_POST["id"];
-$resultaat = $mysqli->query("SELECT * from tblproducten where id= '".$id."'");
-$row = $resultaat->num_rows;
-if($row == 1){
-header('location:productstoevoegen.php?fout');
-    }else{
     $naam = $_POST["name"];
     $image = $_POST["image"];
     $prijs =$_POST["prijs"];
-    $sql = "INSERT INTO tblproducten(id,image,naam,prijs)VALUES('" . $id . "','" . $image . "','" . $naam . "','" . $prijs . "')";
+    $sql = "INSERT INTO tblproducten(image,naam,prijs)VALUES('" . $image . "','" . $naam . "','" . $prijs . "')";
         if($mysqli->query($sql)){
         header('location: products.php');
         }else{
         print $mysqli->error;
         }
-    }
 }else{
 print'<!DOCTYPE html>
 <html lang="en">
@@ -34,10 +27,6 @@ print'<!DOCTYPE html>
 <div class="toevoegen">   
     <form method="post" action="productstoevoegen.php"> 
     <div class="input">
-        <div class="id">
-            <label for="id">id</label>
-            <input type = "text" name= "id" required>
-        </div>
         <div class="image">
         <label for="image">image</label>
         <input type = "text" name= "image" required>
@@ -50,9 +39,6 @@ print'<!DOCTYPE html>
             <label for="prijs">prijs</label>
             <input type = "text" name= "prijs" required>
         </div>';
-        if(isset($_GET["fout"])){
-            print '<label id = "fout">Foute invoer</label>';
-        }
         print'<input type="submit" name="submit" >
     </div>
     </form>

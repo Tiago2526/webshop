@@ -19,9 +19,7 @@ body {
 	flex-direction: column;
 	gap: 120px;
 }
-.container h1 {
-	color: #BB0A21;
-}
+
 nav {
 	display: flex;
 	align-items: center;
@@ -29,6 +27,13 @@ nav {
 nav .logo {
 	flex: 1;
 	text-align: left;
+}
+nav a{
+	display: inline-block;
+}
+.container h1 {
+	
+	color: #BB0A21;
 }
 
 nav .links {
@@ -56,12 +61,23 @@ nav ul {
 	gap: 20px;
 	justify-content: center;
 }
-
-
 nav ul a:hover {
 	color: #696773;
 }
-
+nav .dot{
+	position: absolute;
+	top: 2%;
+	right: 8%;
+	width: 30px;
+	height: 30px;
+	background-color: #272727;
+	border-radius: 20px;
+}
+nav .aantal{
+	position: absolute;
+	top: 2%;
+	right: 8.5%;
+}
 .showroom img {
 	width: 80%;
 	position: absolute;
@@ -75,7 +91,7 @@ nav ul a:hover {
 	opacity: 80%;
 	position: absolute;
 	top: 65%;
-	left: 80%;		
+	left: 80%;
 	background-color: #BB0A21;
 	border-radius: 10px;
 	margin: 10px;
@@ -83,4 +99,25 @@ nav ul a:hover {
 	padding-right: 25px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.products {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	background-color: #696773;
+	padding: 20px;
+	border-radius: 10px	 ;
+}
+.products a{
+	background-color: #BB0A21;
+	border-radius: 10px;
+	padding: 12px 24px;
+}
+.products a:hover {
+	opacity: .8;
+}
+.products img{
+	width: 70%;
+	margin: 5px;
 }

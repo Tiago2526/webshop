@@ -20,7 +20,16 @@ print'
 		 			<li><a href="categorieen.php">Categorieen</a></li>
 		 		</ul>
 		 	</div>
-		 	<div class="account">
+		 	<div class="account">			
+			<span class="dot"></span>';
+			 $email = $_SESSION["inlog"];
+			 $aantal = 0;
+			 $resultaat = $mysqli->query("SELECT * FROM tblbestelling WHERE email = '".$email."'");
+			 while($row = $resultaat->fetch_assoc()){
+				 $aantal += $row["aantal"];
+			 }
+			 print'
+			 <p class="aantal">'.$aantal.'</p>
 			 <a href = "cart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
 			 if(isset($_SESSION["admin"])){
 				print'<a href="account.php"><img src="./fotos/account.png" height="60" width="60"></a>';

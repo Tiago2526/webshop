@@ -14,7 +14,8 @@ print '<!DOCTYPE html>
 		 	<a href= "../account.php"><h1>Dodge</h1></a>
 		</nav>
 		<div class="products">
-		<table>';
+		<table>
+		<tr><th>Id</th><th>Image</th><th>Naam</th><th>Prijs</th></tr>';
 			$resultaat = $mysqli->query("SELECT * from tblproducten");
 			while($row = $resultaat->fetch_assoc()){
 				print "<tr><td>". $row["id"]."</td><td>". $row["image"]."</td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>

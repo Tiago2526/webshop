@@ -15,7 +15,8 @@ print '<!DOCTYPE html>
 		 	<a href= "../account.php"><h1>Dodge</h1></a>
 		</nav>
         <div class="users">
-		<table>';
+		<table>
+		<tr><th>Email</th><th>Voornaam</th><th>Naam</th></tr>';
         $resultaat = $mysqli->query("SELECT * from tblgegevens where admin = 1");
 		while ($row = $resultaat->fetch_assoc()){
 			print "<tr><td>". $row["email"]."</td><td>". $row["voornaam"]."</td><td>". $row["naam"]."</td><td>

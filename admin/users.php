@@ -15,16 +15,17 @@ print '<!DOCTYPE html>
 		 	<a href= "../account.php"><h1>Dodge</h1></a>
 		</nav>
         <div class="users">
-		<table>';
-        $resultaat = $mysqli->query("SELECT * from tblgegevens where admin is null");
+		<table>
+		<tr><th>Email</th><th>Voornaam</th><th>Naam</th></tr>';
+		$resultaat = $mysqli->query("SELECT * from tblgegevens where admin is null");
 		while ($row = $resultaat->fetch_assoc()){
 			print "<tr><td>". $row["email"]."</td><td>". $row["voornaam"]."</td><td>". $row["naam"]."</td><td>
 			<a href = wijzig.php?teveranderen=".$row['email'].">Wijzigen</a></td><td>
 			<a href= wis.php?tewissen=".$row['email'].">Wis</a></td></tr>";
 		}
         print'</table>
-		</div>
 		<a href="toevoegen.php?admin=0">Add user</a>
+		</div>
     </div>
     
 </body>
