@@ -41,7 +41,7 @@ if($row != 1){
                 <h1> Welcome to Dodge shop </h1>
             </div>
             <div class="decent">
-            <form method = "post" action = "home.php">
+            <form method = "post" action= "home.php">
                     <div class="input">
                         <div class="image">
                             <img src="./fotos/Dodge-logo.png" alt="">

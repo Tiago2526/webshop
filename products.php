@@ -17,7 +17,7 @@ print'
 		 	<div class = "links">
 		 		<ul>
 		 			<li><a href="products.php">Products</a></li>
-		 			<li><a href="categorieen.php">Categorieen</a></li>
+		 			<li><a href="https://www.dodge.com/" target="blank">Credits</a></li>
 		 		</ul>
 		 	</div>
 		 	<div class="account">';			
