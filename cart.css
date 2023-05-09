@@ -36,6 +36,19 @@ nav a{
 	transition: .2s ease-in-out;
 	font-size: 30px;
 }
+.products a{
+	text-decoration: none;
+}
+.products #delete:hover{
+	color: #fffff0;
+}
+.leeg a{
+	color: inherit;
+	text-decoration: none;
+}
+.leeg a:hover{
+	color: #BB0A21;
+}
 .cart{
 	display: flex;
 	justify-content: flex-end;
@@ -46,14 +59,4 @@ nav a{
     background-color: #BB0A21;
     padding: 10px;
     border-radius: 20px;
-}
-.products .aantal{
-	position: relative;
-	top: 18px;
-	left: 10px;
-}
-.products .delete{
-	float: left;
-	width: 100px;
-	height: 100px;
 }
