@@ -24,7 +24,7 @@ if ($mysqli->query($sql)) {
     $pdf->Cell(40, 10, 'Order ID:');
     $pdf->Cell(40, 10, $row["id"]);
 
-    $pdf_file = 'order_' . $row["id"] . '.pdf';
+    $pdf_file = 'order_' . $factuurId . '.pdf';
     $pdf->Output('F', './orders/' .$pdf_file);
 
     $pdf_data = file_get_contents('./orders/order_' . $factuurId . '.pdf');
@@ -48,7 +48,7 @@ if ($mysqli->query($sql)) {
 
     $pdf->SetFont('Helvetica', '', 12);
     $pdf->Cell(40, 10, 'Customer Name:', 0, 0);
-    $pdf->Cell(100, 10, $row["email"], 0, 1);
+    $pdf->Cell(100, 10, $email, 0, 1);
 
     $pdf->Cell(40, 10, 'Invoice Number:', 0, 0);
     $pdf->Cell(100, 10, $factuurId, 0, 1);
@@ -65,26 +65,28 @@ if ($mysqli->query($sql)) {
 
     // make list of every product id
     $productIds = array();
-    $resultaat = $mysqli->query("SELECT FROM tblbestelling WHERE email = '" . $email . "'")
+    $resultaat = $mysqli->query("SELECT * FROM tblfacturen,tblproducten WHERE email = '" . $email . "' and factuurId = '" . $factuurId . "' AND tblfacturen.id = tblproducten.id");
     $row = $resultaat->fetch_assoc();
     $items = array(
-
-
-
-
-    )
+        "id" => $row["id"],
+        "name" => $row["naam"],
+        "image" => $row["image"],
+        "price" => $row["prijs"],
+        "quantity" => $row["aantal"]
+    );
     $pdf->SetFont('Helvetica', '', 12);
     foreach ($items as $item) {
-        for ($i = 0; $i < $item['aantal']; $i++) {
+        for ($i = 0; $i < $items; $i++) {
             $productIds[] = $row['id'];
         }
-        $pdf->Cell(90, 10, $row['name'], 1, 0);
+        $pdf->Cell(90, 10, $row['naam'], 1, 0);
         $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
         $pdf->Cell(30, 10, $row['aantal'], 1, 0);
         $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
     }
     $resultaat = $mysqli->query("SELECT * FROM tblfacturen where factuurId= '" . $factuurId . "'");
     while($row= $resultaat->fetch_assoc()){
+        $subtotal = 0;
         $subtotal += $row["aantal"]*$row["prijs"];
     }   
     $total = $subtotal*0.21;

@@ -18,12 +18,15 @@ print '<!DOCTYPE html>
 		<div class="products">';
 		$email = $_SESSION["inlog"];
 		$resultaat = $mysqli->query("SELECT * FROM tblproducten,tblbestelling where email='".$email."' AND tblbestelling.id = tblproducten.id");
-		while($row = $resultaat->fetch_assoc()){
-			print'<div class="products">
-			<img src="'.$row["image"].'">
-			<h1>Aantal '.$row["aantal"].'</h1>
-			<h1>Prijs '.$row["prijs"]*$row["aantal"].'</h1>
-			</div>';
+		if($row["aantal"] > 0){
+			while($row = $resultaat->fetch_assoc()){
+				print'<div class="products">
+				<img src="'.$row["image"].'">
+				<h1 class="aantal">Aantal '.$row["aantal"].'</h1>
+				<a href = "delete.php"><img class ="delete" src="./fotos/garbage.png" width="80px" height="80px"></a>
+				<h1>Prijs '.$row["prijs"]*$row["aantal"].'</h1>
+				</div>';
+			}
 		}
 		print '</div>
 		<div class="cart">

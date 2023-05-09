@@ -47,3 +47,13 @@ nav a{
     padding: 10px;
     border-radius: 20px;
 }
+.products .aantal{
+	position: relative;
+	top: 18px;
+	left: 10px;
+}
+.products .delete{
+	float: left;
+	width: 100px;
+	height: 100px;
+}
