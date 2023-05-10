@@ -3,16 +3,22 @@ require './fpdf/fpdf.php';
 include 'connect.php';
 session_start();
 $email = $_SESSION["inlog"];
-$factuurId = rand(1000,9999);
+$factuurId = rand(1000, 9999);
 $resultaat = $mysqli->query("SELECT * from tblfacturen where factuurid = '" . $factuurId . "'");
 $row = $resultaat->num_rows;
-while($row == 1){
-    $factuurId =rand(1000,9999);
+while ($row == 1) {
+    $factuurId = rand(1000, 9999);
 }
 $resultaat = $mysqli->query("SELECT * FROM tblbestelling,tblproducten WHERE email = '" . $email . "' AND tblbestelling.id = tblproducten.id");
+$ids[] = array();
 while ($row = $resultaat->fetch_assoc()) {
+    if(in_array($row["id"],$ids)) {
+        continue;
+    }
+    array_push($ids,$row["id"]);
     $sql = "INSERT INTO tblfacturen(factuurId,email,naam,aantal,id,prijs) VALUES('" . $factuurId . "','" . $row["email"] . "','" . $row["naam"] . "','" . $row["aantal"] . "','" . $row["id"] . "',
     '" . $row["prijs"] * $row["aantal"] . "')";
+    $mysqli->query($sql);
 }
 if ($mysqli->query($sql)) {
     $resultaat = $mysqli->query("SELECT * FROM tblproducten,tblbestelling where tblbestelling.email = '" . $email . "' AND tblbestelling.id = tblproducten.id");
@@ -25,7 +31,7 @@ if ($mysqli->query($sql)) {
     $pdf->Cell(40, 10, $row["id"]);
 
     $pdf_file = 'order_' . $factuurId . '.pdf';
-    $pdf->Output('F', './orders/' .$pdf_file);
+    $pdf->Output('F', './orders/' . $pdf_file);
 
     $pdf_data = file_get_contents('./orders/order_' . $factuurId . '.pdf');
     $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
@@ -37,7 +43,6 @@ if ($mysqli->query($sql)) {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
 
-    echo ' <a href="' . $pdf_file . '">Download PDF</a>';
     define('EURO', chr(128));
 
     $pdf = new FPDF();
@@ -67,30 +72,37 @@ if ($mysqli->query($sql)) {
     $productIds = array();
     $resultaat = $mysqli->query("SELECT * FROM tblfacturen,tblproducten WHERE email = '" . $email . "' and factuurId = '" . $factuurId . "' AND tblfacturen.id = tblproducten.id");
     $row = $resultaat->fetch_assoc();
-    $items = array(
-        "id" => $row["id"],
-        "name" => $row["naam"],
-        "image" => $row["image"],
-        "price" => $row["prijs"],
-        "quantity" => $row["aantal"]
-    );
+    // $items = array(
+    //     "id" => (int) $row["id"],
+    //     "name" => $row["naam"],
+    //     "image" => $row["image"],
+    //     "price" => (int) $row["prijs"],
+    //     "quantity" => (int) $row["aantal"]
+    // );
+
     $pdf->SetFont('Helvetica', '', 12);
-    foreach ($items as $item) {
-        for ($i = 0; $i < $items; $i++) {
-            $productIds[] = $row['id'];
-        }
-        $pdf->Cell(90, 10, $row['naam'], 1, 0);
-        $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
-        $pdf->Cell(30, 10, $row['aantal'], 1, 0);
-        $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
-    }
+
+    $pdf->Cell(90, 10, $row['naam'], 1, 0);
+    $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
+    $pdf->Cell(30, 10, $row['aantal'], 1, 0);
+    $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
+
+    // foreach ($items as $item) {
+    //     var_dump("Item:" . $item);
+    //     for ($i = 0; $i <= sizeof($items); $i++) {
+    //         $productIds[] = $item['quantity'];
+    //     }
+    //     $pdf->Cell(90, 10, $row['naam'], 1, 0);
+    //     $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
+    //     $pdf->Cell(30, 10, $row['aantal'], 1, 0);
+    //     $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
+    // }
     $resultaat = $mysqli->query("SELECT * FROM tblfacturen where factuurId= '" . $factuurId . "'");
-    while($row= $resultaat->fetch_assoc()){
-        $subtotal = 0;
-        $subtotal += $row["aantal"]*$row["prijs"];
-    }   
-    $total = $subtotal*0.21;
-    $tax = 0.21;
+    while ($row = $resultaat->fetch_assoc()) {
+        $subtotal = $row["prijs"];
+    }
+    $total = $subtotal + ($subtotal * 0.21);
+    $tax = $subtotal*0.21;
     $productIdsString = implode(',', $productIds);
 
     $pdf->Cell(120, 10, '', 0, 0);
@@ -107,11 +119,13 @@ if ($mysqli->query($sql)) {
     $pdf->Cell(40, 10, EURO . ' ' . $total, 0, 1);
 
     // output PDF to browser
-    $pdf_file = $factuurId . '.pdf';
-    $pdf->Output('F', '../../tblfacturen/' . $pdf_file);
+    $pdf_file = 'order_'.$factuurId . '.pdf';
+    $pdf->Output('F', './orders/' . $pdf_file);
 } else {
     print $mysqli->error;
 }
 if ($mysqli->query("DELETE FROM tblbestelling WHERE email = '" . $email . "'")) {
     print "succes";
 }
+
+echo ' <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>';
