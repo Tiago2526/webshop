@@ -59,9 +59,7 @@ while ($row = $resultaat->fetch_assoc()) {
     $pdf->Cell(30, 10, 'Quantity', 1, 0, 'C');
     $pdf->Cell(40, 10, 'Total', 1, 1, 'C');
 
-    // make list of every product id
-
-   $subtotal = 0; 
+    $subtotal = 0; 
     $resultaat = $mysqli->query("SELECT * FROM tblfacturen WHERE email = '" . $email . "' and factuurId = '" . $factuurId . "'");
     $pdf->SetFont('Helvetica', '', 12);
     while($row = $resultaat->fetch_assoc()){
@@ -71,31 +69,7 @@ while ($row = $resultaat->fetch_assoc()) {
         $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
         $subtotal += $row["prijs"] *$row["aantal"];
     }
-    // $items = array(
-    //     "id" => (int) $row["id"],
-    //     "name" => $row["naam"],
-    //     "image" => $row["image"],
-    //     "price" => (int) $row["prijs"],
-    //     "quantity" => (int) $row["aantal"]
-    // );
 
-    
-
-    /*$pdf->Cell(90, 10, $row['naam'], 1, 0);
-    $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
-    $pdf->Cell(30, 10, $row['aantal'], 1, 0);
-    $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);*/
-
-    // foreach ($items as $item) {
-    //     var_dump("Item:" . $item);
-    //     for ($i = 0; $i <= sizeof($items); $i++) {
-    //         $productIds[] = $item['quantity'];
-    //     }
-    //     $pdf->Cell(90, 10, $row['naam'], 1, 0);
-    //     $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
-    //     $pdf->Cell(30, 10, $row['aantal'], 1, 0);
-    //     $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
-    // }
     $total = $subtotal + ($subtotal * 0.21);
     $tax = $subtotal*0.21;
 
