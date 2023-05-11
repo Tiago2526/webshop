@@ -1,7 +1,6 @@
 <?php
 include 'connect.php';
 if(isset($_POST["submit"])){
-    var_dump($_FILES["image"]);
     if($_FILES != null){
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
             $targetDir = "../fotos/"; // Specify the directory where you want to store the uploaded images
@@ -52,8 +51,8 @@ print'<!DOCTYPE html>
     <div class="input">
         <div class="image">
             <label for="image">image</label>
+            <input type="file" name="image" id="image" accept="image/*"> 
         </div>
-        <input type="file" name="image" id="image" accept="image/*"> 
         <div class="name">
             <label for="name">naam</label>
             <input type = "text" name= "name" required>

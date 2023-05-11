@@ -2,32 +2,72 @@
 include 'connect.php';
 session_start();
 if(isset($_POST["submit"])){
-$id = $_POST["id"];
-$naam = $_POST["naam"];
-$image = $_POST["image"];
-$prijs = $_POST["prijs"];
-$oldid = $_SESSION["product"];
-    if($id == $oldid){
-    $sql = "UPDATE tblproducten SET id ='" . $id . "',image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
-        if($mysqli->query($sql)){
-            header('location:products.php');
-        }else{
-            print $mysqli->error;
+    if($_FILES != null){
+        if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+            $targetDir = "../fotos/"; // Specify the directory where you want to store the uploaded images
+            $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        
+            // Check if the uploaded file is an image
+            $validExtensions = array("jpg", "jpeg", "png", "gif");
+            if (in_array($imageFileType, $validExtensions)) {
+                // Move the temporary uploaded file to the desired location
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                    echo "The file has been uploaded successfully.";
+                    $image = './fotos/'.$_FILES["image"]["name"];
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            } else {
+                echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
+            }
+        } else {
+            $image ="";
         }
-    }else{
-        $resultaat = $mysqli->query("SELECT * FROM tblproducten where id= '".$id."'");
-        $row = $resultaat->num_rows;
-        if($row == 1){
-            header('location:productswijzig.php?fout');
+    }
+    $id = $_POST["id"];
+    $naam = $_POST["naam"];
+    $prijs = $_POST["prijs"];
+    $oldid = $_SESSION["product"];
+    if($id == $oldid){
+        if(empty($image)){
+            $sql = "UPDATE tblproducten SET id ='" . $id . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
+            if($mysqli->query($sql)){
+                header('location:products.php');
+            }else{
+                print $mysqli->error;
+            }
         }else{
-        $sql = "UPDATE tblproducten SET id ='" . $id . "',image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
+            $sql = "UPDATE tblproducten SET id ='" . $id . "',image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
             if($mysqli->query($sql)){
                 header('location:products.php');
             }else{
                 print $mysqli->error;
             }
         }
-    }
+    }else{
+            $resultaat = $mysqli->query("SELECT * FROM tblproducten where id= '".$id."'");
+            $row = $resultaat->num_rows;
+            if($row == 1){
+                header('location:productswijzig.php?fout');
+            }else{
+                if(empty($image)){
+                    $sql = "UPDATE tblproducten SET id ='" . $id . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
+                    if($mysqli->query($sql)){
+                        header('location:products.php');
+                    }else{
+                        print $mysqli->error;
+                    }
+                }else{
+                    $sql = "UPDATE tblproducten SET id ='" . $id . "',image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
+                    if($mysqli->query($sql)){
+                        header('location:products.php');
+                    }else{
+                        print $mysqli->error;
+                    }
+                }
+            }
+        }
 }else{
     if(isset($_GET["teveranderen"])){
         $id = $_GET["teveranderen"];
@@ -49,7 +89,7 @@ print '<!DOCTYPE html>
     print'<a href= "products.php"><h1>Dodge</h1></a>
     </nav>
     <div class="toevoegen">   
-        <form method="post" action="productswijzig.php"> 
+        <form method="post" action="productswijzig.php" enctype="multipart/form-data""> 
         <div class="input">
             <div class="id">
                 <label for="id">id</label>
@@ -57,7 +97,7 @@ print '<!DOCTYPE html>
             </div>
             <div class="image">
             <label for="image">image</label>
-            <input type = "text" name= "image" value='.$row["image"].'>
+            <input type="file" name="image" id="image" accept="image/*"> 
             </div>
             <div class="naam">
                 <label for="naam">naam</label>
