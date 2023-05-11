@@ -89,8 +89,11 @@ while ($row = $resultaat->fetch_assoc()) {
     // output PDF to browser
     $pdf_file = 'order_'.$factuurId . '.pdf';
     $pdf->Output('F', './orders/' . $pdf_file);
-if ($mysqli->query("DELETE FROM tblbestelling WHERE email = '" . $email . "'")) {
-    print "succes";
+if ($mysqli->query("DELETE FROM tblbestelling WHERE email = '" . $email . "'")){
+    print'<div class="uitkomst"> 
+     <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>
+     </div>';    
+}else{
+    print $mysqli->error;
 }
 
-echo ' <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>';
