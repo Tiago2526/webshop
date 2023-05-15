@@ -11,7 +11,7 @@ if(isset($_POST["submit"])){
             $validExtensions = array("jpg", "jpeg", "png", "gif");
             if (in_array($imageFileType, $validExtensions)) {
                 // Move the temporary uploaded file to the desired location
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {    
                     echo "The file has been uploaded successfully.";
                 } else {
                     echo "Sorry, there was an error uploading your file.";

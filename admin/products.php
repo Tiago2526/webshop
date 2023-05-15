@@ -20,7 +20,7 @@ print '<!DOCTYPE html>
 			while($row = $resultaat->fetch_assoc()){
 				$image = $row["image"];
 				$image = str_replace("./fotos/","../fotos/",$image);
-				print "<tr><td>". $row["id"]."</td><td><img src=".$image." width='180' height='180'></td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
+				print "<tr><td>". $row["id"]."</td><td><img src=".$image." width='200' height='140'></td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
 			<a href = productswijzig.php?teveranderen=".$row['id'].">Wijzigen</a></td><td>
 			<a href= productswis.php?tewissen=".$row['id'].">Wis</a></td></tr>";
 			}
