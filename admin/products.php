@@ -18,7 +18,9 @@ print '<!DOCTYPE html>
 		<tr><th>Id</th><th>Image</th><th>Naam</th><th>Prijs</th></tr>';
 			$resultaat = $mysqli->query("SELECT * from tblproducten");
 			while($row = $resultaat->fetch_assoc()){
-				print "<tr><td>". $row["id"]."</td><td>". $row["image"]."</td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
+				$image = $row["image"];
+				$image = str_replace("./fotos/","../fotos/",$image);
+				print "<tr><td>". $row["id"]."</td><td><img src=".$image." width='180' height='180'></td><td>". $row["naam"]."</td><td>". $row["prijs"]."</td><td>
 			<a href = productswijzig.php?teveranderen=".$row['id'].">Wijzigen</a></td><td>
 			<a href= productswis.php?tewissen=".$row['id'].">Wis</a></td></tr>";
 			}

@@ -27,12 +27,7 @@ while ($row = $resultaat->fetch_assoc()) {
     $pdf_data = file_get_contents('./orders/order_' . $factuurId . '.pdf');
     $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
 
-    $sql = "update tblfacturen SET pdf ='" . $pdf_data . "' where factuurId = '" . $factuurId . "'";
-    if ($mysqli->query($sql)) {
-        echo "PDF file saved to database.";
-    } else {
-        echo "Error: " . $sql . "<br>" . $mysqli->error;
-    }
+
 
     define('EURO', chr(128));
 
@@ -89,6 +84,18 @@ while ($row = $resultaat->fetch_assoc()) {
     // output PDF to browser
     $pdf_file = 'order_'.$factuurId . '.pdf';
     $pdf->Output('F', './orders/' . $pdf_file);
+
+    $pdf_data = file_get_contents('./orders/order_' . $factuurId . '.pdf');
+    $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
+    
+    $sql = "update tblfacturen SET pdf ='" . $pdf_data . "' where factuurId = '" . $factuurId . "'";
+
+    if ($mysqli->query($sql)) {
+        echo "PDF file saved to database.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $mysqli->error;
+    }
+    
 if ($mysqli->query("DELETE FROM tblbestelling WHERE email = '" . $email . "'")){
     print'<div class="uitkomst"> 
      <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>

@@ -16,16 +16,17 @@ print '<!DOCTYPE html>
 		</nav>
         <div class="sales">
 		<table>
-		<tr><th>Email</th><th>Naam</th><th>Aantal</th><th>Id</th><th>Prijs</th><th>Tijd</th></tr>';
+		<tr><th>Factuur</th><th>Email</th><th>Naam</th><th>Aantal</th><th>Id</th><th>Prijs</th><th>Tijd</th></tr>';
 		$resultaat = $mysqli->query("SELECT * from tblfacturen order by Tijd desc");
 		while ($row = $resultaat->fetch_assoc()){
-			print "<tr><td>". $row["email"]."</td><td>". $row["naam"]."</td><td>". $row["aantal"]."</td><td>
-			". $row["id"]."</td><td>". $row["prijs"]."</td><td>". $row["Tijd"]."</td></tr>";
+			print "<tr><td>". $row["factuurId"]."</td><td>". $row["email"]."</td><td>". $row["naam"]."</td><td>". $row["aantal"]."</td><td>
+			". $row["id"]."</td><td>". $row["prijs"]."</td><td>". $row["Tijd"]."</td>
+			<td><a href='downloadpdf.php?factuurId=".$row["factuurId"]."'>Download pdf</a></td></tr>";
 		}
+
         print'</table>
 		</div>
     </div>
     
 </body>
 </html>';
-?>
