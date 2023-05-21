@@ -33,9 +33,10 @@ while ($row = $resultaat->fetch_assoc()) {
 
     $pdf = new FPDF();
     $pdf->AddPage();
-
+    $pdf->Image('./fotos/dodgeLogopdf.png', 10, 12, 45);
     $pdf->SetFont('Helvetica', 'B', 16);
     $pdf->Cell(190, 10, 'INVOICE', 0, 1, 'C');
+    $pdf->Ln(20);
 
     $pdf->SetFont('Helvetica', '', 12);
     $pdf->Cell(40, 10, 'Customer Name:', 0, 0);
@@ -44,7 +45,7 @@ while ($row = $resultaat->fetch_assoc()) {
     $pdf->Cell(40, 10, 'Invoice Number:', 0, 0);
     $pdf->Cell(100, 10, $factuurId, 0, 1);
 
-    $invoiceDate = date('y-m-d');
+    $invoiceDate = date('d-m-Y');
     $pdf->Cell(40, 10, 'Invoice Date:', 0, 0);
     $pdf->Cell(100, 10, $invoiceDate, 0, 1);
 
@@ -59,9 +60,9 @@ while ($row = $resultaat->fetch_assoc()) {
     $pdf->SetFont('Helvetica', '', 12);
     while($row = $resultaat->fetch_assoc()){
         $pdf->Cell(90, 10, $row['naam'], 1, 0);
-        $pdf->Cell(30, 10, EURO . ' ' . $row['prijs'], 1, 0);
-        $pdf->Cell(30, 10, $row['aantal'], 1, 0);
-        $pdf->Cell(40, 10, EURO . ' ' . $row['prijs'] * $row['aantal'], 1, 1);
+        $pdf->Cell(30, 10, EURO . ' ' . number_format($row['prijs'], 2, ',', '.'), 1, 0, 'R');
+        $pdf->Cell(30, 10, $row['aantal'], 1, 0,'R');
+        $pdf->Cell(40, 10, EURO . ' ' . number_format($row['prijs'] * $row['aantal'], 2, ',', '.'), 1, 1, 'R');
         $subtotal += $row["prijs"] *$row["aantal"];
     }
 
@@ -70,16 +71,16 @@ while ($row = $resultaat->fetch_assoc()) {
 
     $pdf->Cell(120, 10, '', 0, 0);
     $pdf->Cell(30, 10, 'Subtotal:', 0, 0);
-    $pdf->Cell(40, 10, EURO . ' ' . $subtotal, 0, 1);
+    $pdf->Cell(40, 10, EURO . ' ' . number_format($subtotal, 2, ',', '.'), 0, 1, 'R');
 
     $pdf->Cell(120, 10, '', 0, 0);
     $pdf->Cell(30, 10, 'BTW (21%):', 0, 0);
-    $pdf->Cell(40, 10, EURO . ' ' . $tax, 0, 1);
+    $pdf->Cell(40, 10, EURO . ' ' . number_format($tax, 2, ',', '.'), 0, 1, 'R');
 
     $pdf->SetFont('Helvetica', 'B', 12);
     $pdf->Cell(120, 10, '', 0, 0);
     $pdf->Cell(30, 10, 'Total:', 0, 0);
-    $pdf->Cell(40, 10, EURO . ' ' . $total, 0, 1);
+    $pdf->Cell(40, 10, EURO . ' ' . number_format($total, 2, ',', '.'), 0, 1, 'R');
 
     // output PDF to browser
     $pdf_file = 'order_'.$factuurId . '.pdf';

@@ -1,7 +1,7 @@
 <?php
-include "connect.php";
+include 'connect.php';
 session_start();
-if($_POST["login"]){
+if(isset($_POST["login"])){
 $email = $_POST["user"];
 $password = $_POST["password"];
 $sql = "SELECT * FROM tblgegevens WHERE email='" . $email . "'";
