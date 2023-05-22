@@ -28,7 +28,7 @@ if(isset($_POST["submit"])){
     $image = './fotos/'.$_FILES["image"]["name"];
     $sql = "INSERT INTO tblproducten(image,naam,prijs)VALUES('" . $image . "','" . $naam . "','" . $prijs . "')";
         if($mysqli->query($sql)){
-         header('location: products.php');
+        header('location: products.php');
         }else{
         print $mysqli->error;
         }

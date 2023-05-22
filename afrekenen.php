@@ -2,6 +2,21 @@
 require './fpdf/fpdf.php';
 include 'connect.php';
 session_start();
+print '<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="afrekenen.css">
+	<title></title>
+</head>
+<body>
+	<div class="container">
+		<nav>
+		 	<a href= "index.php"><h1>Dodge</h1></a>
+		</nav>
+    </div>
+    <div class="pdf">';
 $email = $_SESSION["inlog"];
 do{
     $factuurId = rand(1000,9999);
@@ -81,7 +96,7 @@ while ($row = $resultaat->fetch_assoc()) {
     $pdf->Cell(120, 10, '', 0, 0);
     $pdf->Cell(30, 10, 'Total:', 0, 0);
     $pdf->Cell(40, 10, EURO . ' ' . number_format($total, 2, ',', '.'), 0, 1, 'R');
-
+    
     // output PDF to browser
     $pdf_file = 'order_'.$factuurId . '.pdf';
     $pdf->Output('F', './orders/' . $pdf_file);
@@ -104,4 +119,7 @@ if ($mysqli->query("DELETE FROM tblbestelling WHERE email = '" . $email . "'")){
 }else{
     print $mysqli->error;
 }
-
+print'
+</div>
+</body>
+</html';
