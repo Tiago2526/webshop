@@ -101,7 +101,7 @@ print '<!DOCTYPE html>
             </div>
             <div class="naam">
                 <label for="naam">naam</label>
-                <input type = "text" name= "naam" value='.$row["naam"].'>
+                <input type = "text" name= "naam" value="'.$row["naam"].'">
             </div>
             <div class="prijs">
                 <label for="prijs">prijs</label>
