@@ -25,49 +25,24 @@ if(isset($_POST["submit"])){
             $image ="";
         }
     }
-    $id = $_POST["id"];
     $naam = $_POST["naam"];
     $prijs = $_POST["prijs"];
-    $oldid = $_SESSION["product"];
-    if($id == $oldid){
-        if(empty($image)){
-            $sql = "UPDATE tblproducten SET id ='" . $id . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
-            if($mysqli->query($sql)){
-                header('location:products.php');
-            }else{
-                print $mysqli->error;
-            }
+    $id = $_SESSION["product"];
+    if(empty($image)){
+        $sql = "UPDATE tblproducten SET naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
+        if($mysqli->query($sql)){
+            header('location:products.php');
         }else{
-            $sql = "UPDATE tblproducten SET id ='" . $id . "',image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
-            if($mysqli->query($sql)){
-                header('location:products.php');
-            }else{
-                print $mysqli->error;
-            }
+            print $mysqli->error;
         }
     }else{
-            $resultaat = $mysqli->query("SELECT * FROM tblproducten where id= '".$id."'");
-            $row = $resultaat->num_rows;
-            if($row == 1){
-                header('location:productswijzig.php?fout');
-            }else{
-                if(empty($image)){
-                    $sql = "UPDATE tblproducten SET id ='" . $id . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
-                    if($mysqli->query($sql)){
-                        header('location:products.php');
-                    }else{
-                        print $mysqli->error;
-                    }
-                }else{
-                    $sql = "UPDATE tblproducten SET id ='" . $id . "',image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$oldid."'";
-                    if($mysqli->query($sql)){
-                        header('location:products.php');
-                    }else{
-                        print $mysqli->error;
-                    }
-                }
-            }
+        $sql = "UPDATE tblproducten SET image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
+        if($mysqli->query($sql)){
+            header('location:products.php');
+        }else{
+            print $mysqli->error;
         }
+    }
 }else{
     if(isset($_GET["teveranderen"])){
         $id = $_GET["teveranderen"];
@@ -91,10 +66,6 @@ print '<!DOCTYPE html>
     <div class="toevoegen">   
         <form method="post" action="productswijzig.php" enctype="multipart/form-data""> 
         <div class="input">
-            <div class="id">
-                <label for="id">id</label>
-                <input type = "text" name= "id" value='.$row["id"].'>
-            </div>
             <div class="image">
             <label for="image">image</label>
             <input type="file" name="image" id="image" accept="image/*"> 

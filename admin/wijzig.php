@@ -13,7 +13,7 @@ $rows = $resultaat->num_rows;
 var_dump($rows);
 if(($rows >= 1) && ($oldemail != $newemail)){
     header('location: wijzig.php?teveranderen='.$oldemail.'&fout=1');
-return;
+    return;
 }
 if(empty($password)){
     $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $newemail."' WHERE email = '".$oldemail."'"; 
@@ -23,6 +23,7 @@ if(empty($password)){
 }
 if($mysqli->query($sql)){
     if(isset($_SESSION["admin"])){
+        unset($_SESSION["admin"]);
         header('location:admins.php');
     }else{
         header('location:users.php');
@@ -34,7 +35,7 @@ if($mysqli->query($sql)){
 $email = $_GET["teveranderen"];
 $_SESSION["inlog"] = $email;
 if(isset($_GET["admin"])){
-    $_SESSION["admin"];    
+    $_SESSION["admin"] =$_GET["admin"] ;    
 }
 $resultaat = $mysqli->query("SELECT * FROM tblgegevens where email = '".$email."'");
 $row = $resultaat->fetch_assoc();

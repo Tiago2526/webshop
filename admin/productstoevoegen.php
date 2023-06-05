@@ -13,6 +13,7 @@ if(isset($_POST["submit"])){
                 // Move the temporary uploaded file to the desired location
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {    
                     echo "The file has been uploaded successfully.";
+                    $image = './fotos/'.$_FILES["image"]["name"];
                 } else {
                     echo "Sorry, there was an error uploading your file.";
                 }
@@ -29,7 +30,6 @@ if(isset($_POST["submit"])){
     if(empty($image)){
         header('location: productstoevoegen.php?fout');
     }else{
-        $image = './fotos/'.$_FILES["image"]["name"];
         $sql = "INSERT INTO tblproducten(image,naam,prijs)VALUES('" . $image . "','" . $naam . "','" . $prijs . "')";
             if($mysqli->query($sql)){
             header('location: products.php');
