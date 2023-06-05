@@ -107,7 +107,7 @@ while ($row = $resultaat->fetch_assoc()) {
     $sql = "update tblfacturen SET pdf ='" . $pdf_data . "' where factuurId = '" . $factuurId . "'";
 
     if ($mysqli->query($sql)) {
-        echo "PDF file saved to database.";
+        echo "Order successful";
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }

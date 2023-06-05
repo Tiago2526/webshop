@@ -21,17 +21,22 @@ if(isset($_POST["submit"])){
             }
         } else {
             echo "No file was uploaded.";
+            $image = "";
         }
     }
     $naam = $_POST["name"];
     $prijs =$_POST["prijs"];
-    $image = './fotos/'.$_FILES["image"]["name"];
-    $sql = "INSERT INTO tblproducten(image,naam,prijs)VALUES('" . $image . "','" . $naam . "','" . $prijs . "')";
-        if($mysqli->query($sql)){
-        header('location: products.php');
-        }else{
-        print $mysqli->error;
-        }
+    if(empty($image)){
+        header('location: productstoevoegen.php?fout');
+    }else{
+        $image = './fotos/'.$_FILES["image"]["name"];
+        $sql = "INSERT INTO tblproducten(image,naam,prijs)VALUES('" . $image . "','" . $naam . "','" . $prijs . "')";
+            if($mysqli->query($sql)){
+            header('location: products.php');
+            }else{
+            print $mysqli->error;
+            }
+    }
 }else{
 print'<!DOCTYPE html>
 <html lang="en">
@@ -60,8 +65,11 @@ print'<!DOCTYPE html>
         <div class="prijs">
             <label for="prijs">prijs</label>
             <input type = "text" name= "prijs" required>
-        </div>
-        <input type="submit" name="submit" >
+        </div>';
+        if(isset($_GET["fout"])){
+            print '<label id = "fout">Foute invoer</label>';
+        }
+        print'<input type="submit" name="submit" >
     </div>
     </form>
 </div>
