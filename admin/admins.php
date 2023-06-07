@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+include '../data.php';
 session_start();
 print '<!DOCTYPE html>
 <html>
@@ -17,8 +18,7 @@ print '<!DOCTYPE html>
         <div class="users">
 		<table>
 		<tr><th>Email</th><th>Voornaam</th><th>Naam</th></tr>';
-        $resultaat = $mysqli->query("SELECT * from tblgegevens where admin = 1");
-		while ($row = $resultaat->fetch_assoc()){
+		foreach(getAllAdmins($mysqli) as $row){
 			print "<tr><td>". $row["email"]."</td><td>". $row["voornaam"]."</td><td>". $row["naam"]."</td><td>
 			<a href = wijzig.php?teveranderen=".$row['email']."&admin=1>Wijzigen</a></td><td>
 			<a href= wis.php?tewissen=".$row['email'].">Wis</a></td></tr>";

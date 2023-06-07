@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+include '../data.php';
 session_start();
 if(isset($_POST["submit"])){
 $naam = $_POST["naam"];
@@ -7,13 +8,9 @@ $voornaam = $_POST["voornaam"];
 $oldemail = $_SESSION["inlog"];
 $newemail = $_POST["email"];
 $password = $_POST["password"];
-$sql = "SELECT * FROM tblgegevens where email = '".$newemail."'";
-$resultaat = $mysqli->query($sql);
-$rows = $resultaat->num_rows;
-var_dump($rows);
-if(($rows >= 1) && ($oldemail != $newemail)){
-    header('location: wijzig.php?teveranderen='.$oldemail.'&fout=1');
-    return;
+if(!(doesUserExist($mysqli,$oldemail,$newemail))){
+header('location: wijzig.php?teveranderen='.$oldemail.'&fout=1');
+return;
 }
 if(empty($password)){
     $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $newemail."' WHERE email = '".$oldemail."'"; 
@@ -23,7 +20,6 @@ if(empty($password)){
 }
 if($mysqli->query($sql)){
     if(isset($_SESSION["admin"])){
-        unset($_SESSION["admin"]);
         header('location:admins.php');
     }else{
         header('location:users.php');
@@ -49,8 +45,8 @@ print '<!DOCTYPE html>
 </head>
 <div class="container">
     <nav>';
-    print'<a href= "admins.php"><h1>Dodge</h1></a>
-    </nav>
+    print'<a href= "admins.php"><h1>Dodge</h1></a>';
+    print'</nav>
     <div class="toevoegen">   
         <form method="post" action="wijzig.php"> 
         <div class="input">

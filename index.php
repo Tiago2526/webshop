@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "connect.php";
+include 'data.php';
 print'
 <!DOCTYPE html>
 <html>
@@ -25,13 +26,8 @@ print'
 		 	<div class="account">';
 			if(isset($_SESSION["inlog"])){
 				$email = $_SESSION["inlog"];
-				$aantal = 0;
-				$resultaat = $mysqli->query("SELECT * FROM tblbestelling WHERE email = '".$email."'");
-				while($row = $resultaat->fetch_assoc()){
-					$aantal += $row["aantal"];
-				}
 				print'<span class="dot"></span> 
-				<p class="aantal">'.$aantal.'</p>';
+				<p class="aantal">'.getCartAmount($mysqli, $email).'</p>';
 			}
 			print'
 			<a href = "cart.php"><img id="winkelkar"src="./fotos/winkelkar.png" height = "50" width = "50"></a>';
