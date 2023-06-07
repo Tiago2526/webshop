@@ -1,52 +1,29 @@
 <?php
-include 'connect.php';
+include '../connect.php';
+include '../data.php';
 session_start();
 if(isset($_POST["submit"])){
     if($_FILES != null){
-        if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-            $targetDir = "../fotos/"; // Specify the directory where you want to store the uploaded images
-            $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        
-            // Check if the uploaded file is an image
-            $validExtensions = array("jpg", "jpeg", "png", "gif");
-            if (in_array($imageFileType, $validExtensions)) {
-                // Move the temporary uploaded file to the desired location
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-                    echo "The file has been uploaded successfully.";
-                    $image = './fotos/'.$_FILES["image"]["name"];
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
-            } else {
-                echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
-            }
-        } else {
-            $image ="";
-        }
+        $imageFile = $_FILES['image'];
+        $imageFileName = $_FILES['image']['name'];
+        $error = $_FILES['image']['error'];
+        $tmpName = $_FILES['image']['tmp_name'];
     }
     $naam = $_POST["naam"];
     $prijs = $_POST["prijs"];
     $id = $_SESSION["product"];
-    if(empty($image)){
-        $sql = "UPDATE tblproducten SET naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
-        if($mysqli->query($sql)){
-            header('location:products.php');
-        }else{
-            print $mysqli->error;
-        }
+    if(isImageUploaded($imageFile,$error,$tmpName,$imageFileName)){
+        $image = './fotos/'.$imageFileName;
+        updateProduct($mysqli,$image,$naam,$prijs,$id);
+        header('location:products.php');
     }else{
-        $sql = "UPDATE tblproducten SET image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
-        if($mysqli->query($sql)){
-            header('location:products.php');
-        }else{
-            print $mysqli->error;
-        }
+        $image = "";
+        updateProduct($mysqli,$image,$naam,$prijs,$id);
+        header('location:products.php');
     }
 }else{
     if(isset($_GET["teveranderen"])){
-        $id = $_GET["teveranderen"];
-        $_SESSION["product"] = $id;
+        $_SESSION["product"] = $_GET["teveranderen"];
     }
 $id = $_SESSION["product"];
 $resultaat = $mysqli->query("SELECT * FROM tblproducten where id = '".$id."'");

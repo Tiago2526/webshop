@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 include '../data.php';
 session_start();
 if(isset($_POST["submit"])){

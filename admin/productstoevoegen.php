@@ -1,41 +1,25 @@
 <?php
-include 'connect.php';
+include '../connect.php';
+include '../data.php';
 if(isset($_POST["submit"])){
     if($_FILES != null){
-        if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-            $targetDir = "../fotos/"; // Specify the directory where you want to store the uploaded images
-            $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        
-            // Check if the uploaded file is an image
-            $validExtensions = array("jpg", "jpeg", "png", "gif");
-            if (in_array($imageFileType, $validExtensions)) {
-                // Move the temporary uploaded file to the desired location
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {    
-                    echo "The file has been uploaded successfully.";
-                    $image = './fotos/'.$_FILES["image"]["name"];
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
-            } else {
-                echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
-            }
-        } else {
-            echo "No file was uploaded.";
-            $image = "";
-        }
+        $imageFile = $_FILES['image'];
+        $imageFileName = $_FILES['image']['name'];
+        $error = $_FILES['image']['error'];
+        $tmpName = $_FILES['image']['tmp_name'];
     }
     $naam = $_POST["name"];
     $prijs =$_POST["prijs"];
-    if(empty($image)){
-        header('location: productstoevoegen.php?fout');
-    }else{
+    if(isImageUploaded($imageFile,$error,$tmpName,$imageFileName)){
+        $image = './fotos/'.$imageFileName;
         $sql = "INSERT INTO tblproducten(image,naam,prijs)VALUES('" . $image . "','" . $naam . "','" . $prijs . "')";
-            if($mysqli->query($sql)){
+        if($mysqli->query($sql)){
             header('location: products.php');
-            }else{
+        }else{
             print $mysqli->error;
-            }
+        }
+    }else{
+        header('location: productstoevoegen.php?fout');
     }
 }else{
 print'<!DOCTYPE html>

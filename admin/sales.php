@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 include '../data.php';
 session_start();
 print '<!DOCTYPE html>

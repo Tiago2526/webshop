@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 $factuurId = $_GET["factuurId"];
 $resultaat = $mysqli->query("SELECT pdf FROM tblfacturen WHERE factuurId='$factuurId'");
 $row = $resultaat->num_rows;

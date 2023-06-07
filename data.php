@@ -46,3 +46,36 @@ function updateUser($connection,$naam,$voornaam,$oldemail,$newemail,$password){
     }
     $resultaat = $connection->query($sql);
 }
+function deleteUser($connection,$email){
+    $connection->query("DELETE from tblgegevens where email = '".$email."'");
+}
+function isImageUploaded($imageFile,$error,$tmpName,$imageFileName){
+    if (isset($imageFile) && $error == 0) {
+        $targetDir = "../fotos/"; // Specify the directory where you want to store the uploaded images
+        $targetFile = $targetDir . basename($imageFileName);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    
+        // Check if the uploaded file is an image
+        $validExtensions = array("jpg", "jpeg", "png", "gif");
+        if (in_array($imageFileType, $validExtensions)) {
+            // Move the temporary uploaded file to the desired location
+            if (move_uploaded_file($tmpName, $targetFile)) {
+                return true;
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
+        }
+    } else {
+        return false;
+    }
+}
+function updateProduct($conection,$image,$naam,$prijs,$id){
+    if(empty($image)){
+        $sql = "UPDATE tblproducten SET naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
+    }else{
+        $sql = "UPDATE tblproducten SET image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
+    }
+        $resultaat = $conection->query($sql);
+}

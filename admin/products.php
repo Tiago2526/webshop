@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 include '../data.php';
 print '<!DOCTYPE html>
 <html>
