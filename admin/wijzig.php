@@ -8,31 +8,20 @@ $voornaam = $_POST["voornaam"];
 $oldemail = $_SESSION["inlog"];
 $newemail = $_POST["email"];
 $password = $_POST["password"];
-if(!(doesUserExist($mysqli,$oldemail,$newemail))){
+if(isEmailInUse($mysqli,$oldemail,$newemail)){
 header('location: wijzig.php?teveranderen='.$oldemail.'&fout=1');
 return;
 }
-if(empty($password)){
-    $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $newemail."' WHERE email = '".$oldemail."'"; 
+updateUser($mysqli,$naam,$voornaam,$oldemail,$newemail,$password);
+if(checkIfAdmin($mysqli,$newemail)){
+    header('location: admins.php');
+    return;
 }else{
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "UPDATE tblgegevens SET naam ='" . $naam . "',voornaam ='" . $voornaam . "',email ='" . $newemail."',password ='" .$hashedPassword."' WHERE email = '".$oldemail."'";
-}
-if($mysqli->query($sql)){
-    if(isset($_SESSION["admin"])){
-        header('location:admins.php');
-    }else{
-        header('location:users.php');
-    }
-}else{
-  print $mysqli->error;
+    header('location: users.php');
 }
 }else{
 $email = $_GET["teveranderen"];
 $_SESSION["inlog"] = $email;
-if(isset($_GET["admin"])){
-    $_SESSION["admin"] =$_GET["admin"] ;    
-}
 $resultaat = $mysqli->query("SELECT * FROM tblgegevens where email = '".$email."'");
 $row = $resultaat->fetch_assoc();
 print '<!DOCTYPE html>

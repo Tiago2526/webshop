@@ -20,7 +20,7 @@ print '<!DOCTYPE html>
 		<tr><th>Email</th><th>Voornaam</th><th>Naam</th></tr>';
 		foreach(getAllAdmins($mysqli) as $row){
 			print "<tr><td>". $row["email"]."</td><td>". $row["voornaam"]."</td><td>". $row["naam"]."</td><td>
-			<a href = wijzig.php?teveranderen=".$row['email']."&admin=1>Wijzigen</a></td><td>
+			<a href = wijzig.php?teveranderen=".$row['email'].">Wijzigen</a></td><td>
 			<a href= wis.php?tewissen=".$row['email'].">Wis</a></td></tr>";
 		}
         print'</table>
