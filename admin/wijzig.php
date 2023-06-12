@@ -8,7 +8,7 @@ $voornaam = $_POST["voornaam"];
 $oldemail = $_SESSION["inlog"];
 $newemail = $_POST["email"];
 $password = $_POST["password"];
-if(isEmailInUse($mysqli,$oldemail,$newemail)){
+if(isEmailInUse($mysqli,$newemail) && $newemail != $oldemail){
 header('location: wijzig.php?teveranderen='.$oldemail.'&fout=1');
 return;
 }

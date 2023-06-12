@@ -30,9 +30,9 @@ function getAllSales($connection){
     $resultaat = $connection->query("SELECT * from tblfacturen order by tijd desc");
     return($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
-function isEmailInUse($connection,$oldemail,$newemail){
-    $resultaat= $connection->query("SELECT * from tblgegevens where email = '".$newemail."'");
-    return($resultaat->num_rows != 0 && $oldemail != $newemail)?true:false;
+function isEmailInUse($connection,$email){
+    $resultaat= $connection->query("SELECT * from tblgegevens where email = '".$email."'");
+    return($resultaat->num_rows != 0)?true:false;
 }
 function checkIfAdmin($connection, $email){
     $resultaat = $connection->query("SELECT * from tblgegevens where email = '".$email."' AND admin = 1");

@@ -28,7 +28,7 @@ if(isset($_POST["submit"])){
     }
     }
 }else{
-if(isset($_GET["admin"])){
+if($_GET["admin"] == 1){
     $_SESSION["admin"]= $_GET["admin"];
 }
 $admin = $_SESSION["admin"];
