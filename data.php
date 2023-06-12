@@ -46,6 +46,14 @@ function updateUser($connection,$naam,$voornaam,$oldemail,$newemail,$password){
     }
     $resultaat = $connection->query($sql);
 }
+function insertUser($connection, $naam, $voornaam, $email, $password, $admin=null){
+    if($admin != null){
+        $sql ="INSERT INTO tblgegevens(naam, voornaam, email, password,admin) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $password . "',1)";
+    }else{
+        $sql = "INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $password . "')";
+    }
+    $resultaat = $connection->query($sql);
+}
 function deleteUser($connection,$email){
     $connection->query("DELETE from tblgegevens where email = '".$email."'");
 }
@@ -71,11 +79,11 @@ function isImageUploaded($imageFile,$error,$tmpName,$imageFileName){
         return false;
     }
 }
-function updateProduct($conection,$image,$naam,$prijs,$id){
+function updateProduct($connection,$image,$naam,$prijs,$id){
     if(empty($image)){
         $sql = "UPDATE tblproducten SET naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
     }else{
         $sql = "UPDATE tblproducten SET image ='" . $image . "',naam ='" . $naam . "',prijs ='" . $prijs."' WHERE id = '".$id."'";
     }
-        $resultaat = $conection->query($sql);
+        $resultaat = $connection->query($sql);
 }

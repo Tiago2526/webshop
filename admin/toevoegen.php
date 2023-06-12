@@ -1,37 +1,30 @@
 <?php
 include '../connect.php';
+include '../data.php';
 session_start();
 if(isset($_POST["submit"])){
     $naam = $_POST["naam"];
     $voornaam = $_POST["voornaam"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $sql = "SELECT * FROM tblgegevens where email = '".$email."'";
-    $resultaat = $mysqli->query($sql);
-    $rows = $resultaat->num_rows;
-    if($rows == 1){
+    if(isEmailInUse($mysqli,$email)){
     header('location: toevoegen.php?fout');
-    }else{
+    return;
+    }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        if($_SESSION["admin"] == 1){
-        if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password,admin) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "',1)")){
-        header('location: admins.php');
+        if($_SESSION["admin_toevoegen"] == 1){
+        insertUser($mysqli,$naam,$voornaam,$email,$hashedPassword,$_SESSION["admin_toevoegen"]);
+        unset($_SESSION["admin_toevoegen"]);
+        header('location:admins.php');
         }else{
-        print $mysqli->error;    
+            insertUser($mysqli,$naam,$voornaam,$email,$hashedPassword);
+            unset($_SESSION["admin_toevoegen"]);
+            header('location:users.php');
         }
-    }else{
-        if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "')")){
-        header('location: users.php');
-        } else {
-        print $mysqli->error;
-        }
-    }
-    }
 }else{
-if($_GET["admin"] == 1){
-    $_SESSION["admin"]= $_GET["admin"];
+if(isset($_GET["admin"])){
+    $_SESSION["admin_toevoegen"] = $_GET["admin"];
 }
-$admin = $_SESSION["admin"];
 print'<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -43,7 +36,7 @@ print'<!DOCTYPE html>
     </head>
 <div class="container">
     <nav>';
-    if($admin == 1){
+    if($_SESSION["admin_toevoegen"] == 1){
     print'<a href= "admins.php"><h1>Dodge</h1></a>';
     }else{
     print'<a href= "users.php"><h1>Dodge</h1></a>';
