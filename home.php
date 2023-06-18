@@ -1,29 +1,20 @@
 <?php
 include 'connect.php';
+include 'data.php';
 session_start();
-if(isset($_POST["login"])){
-$email = $_POST["user"];
-$password = $_POST["password"];
-$sql = "SELECT * FROM tblgegevens WHERE email='" . $email . "'";
-$resultaat = $mysqli->query($sql);
-if(password_verify($password, $resultaat->fetch_assoc()["password"])){
-$resultaat = $mysqli->query("SELECT * from tblgegevens where email='".$email."'");
-$row = $resultaat->num_rows;
-if($row != 1){
-    header('location: home.php?fout');
-}else{
+if(isset($_POST['login'])){
+$email = $_POST['user'];
+$password = $_POST['password'];
+if(isEmailCorrect($mysqli,$email) && isPasswordCorrect($mysqli,$password,$email)){
     $_SESSION["inlog"] = $email;
-    $resultaat = $mysqli->query("SELECT * from tblgegevens where email='".$email."' AND admin = 1") ;
-    $row = $resultaat->num_rows;
-    if($row == 1){
+    if(checkIfAdmin($mysqli,$email)){
         $_SESSION["admin"] = $email;
         header('location: index.php');
     }else{
         header('location: index.php');
     }
-}
 }else{
-    header('location: home.php?fout');
+header('location:home.php?fout');
 }
 }else{
     echo'<!DOCTYPE html>

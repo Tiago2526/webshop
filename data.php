@@ -87,3 +87,11 @@ function updateProduct($connection,$image,$naam,$prijs,$id){
     }
         $resultaat = $connection->query($sql);
 }
+function isEmailCorrect($connection,$email){
+    $resultaat = $connection->query("SELECT * FROM tblgegevens WHERE email = '".$email."'");
+    return($resultaat->num_rows == 0)?false:true;
+}
+function isPasswordCorrect($connection,$password,$email){
+    $resultaat = $connection->query("SELECT * FROM tblgegevens WHERE email = '".$email."'");
+    return(password_verify($password,$resultaat->fetch_assoc()['password']))?true:false;
+}
