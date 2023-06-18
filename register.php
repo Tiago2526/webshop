@@ -1,5 +1,6 @@
 <?php
 include "connect.php";
+include 'data.php';
 session_start();
 echo'<!DOCTYPE html>
     <html lang="en">
@@ -16,10 +17,7 @@ echo'<!DOCTYPE html>
         $voornaam = $_POST["voornaam"];
         $email = $_POST["user"];
         $password = $_POST["password"];
-        $sql = "SELECT * FROM tblgegevens where email = '".$email."'";
-        $resultaat = $mysqli->query($sql);
-        $rows = $resultaat->num_rows;
-        if($rows == 1){
+        if(isEmailInUse($mysqli,$email)){
         header('location: register.php?fout');
         }else{
         print'
@@ -33,15 +31,9 @@ echo'<!DOCTYPE html>
         <div class="image">
         <img src="./fotos/Dodge-logo.png" alt="">
         </div>';
-        $hash = PASSWORD_DEFAULT;
-        $hashedPassword = password_hash($password, $hash);
-        $_SESSION[$email] = $hash;
-    if($mysqli->query("INSERT INTO tblgegevens(naam, voornaam, email, password) VALUES('" . $naam . "','" . $voornaam . "','" . $email . "','" . $hashedPassword . "')")){
-        print "Record succesvol toegevoegd.<br>";
-    } else {
-        print "Error record toevoegen: " . $mysqli->error . "<br>";
-    }
-    print "<a href = 'home.php'>ga terug naar inlog</a>";
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        insertUser($mysqli,$naam, $voornaam, $email, $hashedPassword);
+        print "<a href = 'home.php'>ga terug naar inlog</a>";
     }
 }else{
     print'
